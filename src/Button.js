@@ -2,10 +2,12 @@ import React from 'react';
 import unpressed from './button-unpressed.png';
 import pressed from './button-unpressed.png';
 
+let isPressed = false;
+
 const Button = () => {
     return (
-        <button>
-            <img src="./button-unpressed.png"></img>
+        <button id='the-button'>
+            <img src={ isPressed ? pressed : unpressed }></img>
         </button>
     );
 };
