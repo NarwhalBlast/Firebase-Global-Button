@@ -4,7 +4,7 @@ import "./App.css";
 import firebase from "firebase/app";
 import "firebase/firestore";
 
-import { useDocumentData } from "react-firebase-hooks/firestore";
+// import { useDocumentData } from "react-firebase-hooks/firestore";
 import { useState } from "react";
 
 firebase.initializeApp({
@@ -44,12 +44,16 @@ const Button = () => {
 };
 
 const Counter = () => {
-  const countRef = db.collection('main').doc('counter');
-  const [count] = useDocumentData(countRef, {});
+  const countRef = db.collection("main").doc("counter");
+  const [count, setCount] = useState(0);
 
-  console.log( db.collection("main").doc("counter"))
+  db.collection("main")
+    .doc("counter")
+    .onSnapshot((doc) => {
+      setCount(doc.data().count);
+    });
 
-  return <div id="counter">{ count }</div>;
+  return <div id="counter">{count}</div>;
 };
 
 const handleClick = async () => {
