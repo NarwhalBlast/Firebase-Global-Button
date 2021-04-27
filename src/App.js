@@ -1,15 +1,14 @@
 import React from 'react';
 import './App.css';
 
-import unpressed from './button-unpressed.png';
-import pressed from './button-unpressed.png';
+import unpressedImg from './button-unpressed.png';
+import pressedImg from './button-unpressed.png';
 
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 
-import { useCollectionData, useDocumentData } from 'react-firebase-hooks/firestore';
-
-let isPressed = false;
+import { useDocumentData } from 'react-firebase-hooks/firestore';
+import { useState } from 'react';
 
 firebase.initializeApp({
     apiKey: "AIzaSyAgyZEo_ZtSvMPjqQD9cF2iRzihYztPp1g",
@@ -35,27 +34,31 @@ const App = () => {
 }
 
 const Button = () => {
+    const [pressed, setPressed] = useState(false);
+
     return (
-        <button id='the-button' onClick={ handleClick }>
-            <img src={ isPressed ? pressed : unpressed }></img>
+        <button id='the-button' onClick={ () => { await handleClick(); }}>
+            <img src={ pressed ? pressedImg : unpressedImg }></img>
         </button>
     );
 };
 
 const Counter = () => {
-    const countRef = db.collection('main').doc('counter');
+    // const countRef = db.collection('main').doc('counter');
     // const query = countRef.
 
-    const count = useDocumentData(countRef);
+    // const count = useDocumentData(countRef);
+    const count = 0;
 
     return (
         <div id='counter'>{ count }</div>
     );
 };
 
+
 const handleClick = async () => {
-    const increment = db.FieldValue.increment(1);
+    const increment = firebase.firestore.FieldValue.increment(1);
     db.collection('main').doc('counter').update({count: increment});
-}
+};
 
 export default App;
