@@ -44,13 +44,12 @@ const Button = () => {
 };
 
 const Counter = () => {
-  // const countRef = db.collection('main').doc('counter');
-  // const query = countRef.
+  const countRef = db.collection('main').doc('counter');
+  const [count] = useDocumentData(countRef, {});
 
-  // const count = useDocumentData(countRef);
-  const count = 0;
+  console.log( db.collection("main").doc("counter"))
 
-  return <div id="counter">{count}</div>;
+  return <div id="counter">{ count }</div>;
 };
 
 const handleClick = async () => {
