@@ -32,6 +32,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -40,4 +41,18 @@
 #the-button {
   background-color: transparent;
   border: none;
+  background-image: url("./button-unpressed.png");
+  width: 20em;
+  height: 20em;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+#the-button:hover {
+  cursor: pointer;
+}
+
+#the-button:active {
+  background-image: url("./button-pressed.png");
+
 }
